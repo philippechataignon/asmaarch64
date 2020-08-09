@@ -1,0 +1,9 @@
+*.o
+*.so
+*.bin
+add_test
+calc1
+calc2
+first
+hello
+macro1

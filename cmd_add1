@@ -1,0 +1,2 @@
+as -alhm add1.s -c -o add1.o
+objcopy -O binary add1.o add1.bin

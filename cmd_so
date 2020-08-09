@@ -1,0 +1,4 @@
+nom=add2
+gcc -fpic -shared -o $nom.so $nom.s 
+# gcc -fpic -c $nom.s 
+# gcc -shared -o $nom.so $nom.o
