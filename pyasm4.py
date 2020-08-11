@@ -1,15 +1,22 @@
 #!/usr/bin/env python3
-from time import time
 
 import ctypes
-pyarr = list(range(10000000))
-arr = (ctypes.c_int * len(pyarr))(*pyarr)
+import numpy as np
+from time import time
+
+arr = np.arange(100000000, dtype = np.int32)
+print(arr)
 
 dll = ctypes.cdll.LoadLibrary("./add4.so")
 dll.add4.restype = ctypes.c_long
-dll.add4.argtypes = (ctypes.POINTER(ctypes.c_int), ctypes.c_int)
+dll.add4.argtypes = (
+    np.ctypeslib.ndpointer(dtype=np.int32, ndim=1, flags='C_CONTIGUOUS'),
+    ctypes.c_int
+)
 start = time()
-r = dll.add4(arr, len(pyarr))
+r = dll.add4(arr, len(arr))
 print(time() - start)
-print(r, sum(pyarr))
-
+start = time()
+s = np.sum(arr)
+print(time() - start)
+print(r, s)
