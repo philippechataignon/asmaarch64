@@ -1,4 +1,2 @@
-nom=add2
-gcc -fpic -shared -o $nom.so $nom.s 
-# gcc -fpic -c $nom.s 
-# gcc -shared -o $nom.so $nom.o
+nom=add4
+gcc -fpic -shared -O2 -o $nom.so $nom.s 
