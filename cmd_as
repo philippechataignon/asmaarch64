@@ -1,0 +1,2 @@
+#!/bin/sh
+as -alhm -c $1.s
