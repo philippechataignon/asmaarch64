@@ -4,5 +4,5 @@
 .globl main
 
 main:
-     mov w0, #2
-     ret
+     mov r0, #2
+     bx	 lr

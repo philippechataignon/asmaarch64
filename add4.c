@@ -1,5 +1,6 @@
-long int add4(int array[], int narray) {
-    long int sum = 0;
+#include <stdint.h>
+int64_t add4(int32_t array[], int narray) {
+    int64_t sum = 0;
     for (int i = 0; i < narray; i++) {
         sum += array[i];
     }
