@@ -1,3 +1,3 @@
 #!/bin/sh
 nom=$1
-gcc -fpic -shared -O2 -o $nom.so $nom.s 
+gcc -fpic -shared -o $nom.so $nom.s 
