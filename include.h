@@ -1,174 +1,3 @@
-#define __always_inline __inline __attribute__ ((__always_inline__))
-#define __ASM_BITSPERLONG_H 
-#define __ASM_GENERIC_BITS_PER_LONG 
-#define __ASMNAME2(prefix,cname) __STRING (prefix) cname
-#define __ASMNAME(cname) __ASMNAME2 (__USER_LABEL_PREFIX__, cname)
-#define _ATFILE_SOURCE 1
-#define __attribute_alloc_size__(params) __attribute__ ((__alloc_size__ params))
-#define __attribute_artificial__ __attribute__ ((__artificial__))
-#define __attribute_const__ __attribute__ ((__const__))
-#define __attribute_deprecated__ __attribute__ ((__deprecated__))
-#define __attribute_deprecated_msg__(msg) __attribute__ ((__deprecated__ (msg)))
-#define __attribute_format_arg__(x) __attribute__ ((__format_arg__ (x)))
-#define __attribute_format_strfmon__(a,b) __attribute__ ((__format__ (__strfmon__, a, b)))
-#define __attribute_malloc__ __attribute__ ((__malloc__))
-#define __attribute_noinline__ __attribute__ ((__noinline__))
-#define __attribute_nonstring__ __attribute__ ((__nonstring__))
-#define __attribute_pure__ __attribute__ ((__pure__))
-#define __attribute_used__ __attribute__ ((__used__))
-#define __attribute_warn_unused_result__ __attribute__ ((__warn_unused_result__))
-#define __BEGIN_DECLS 
-#define __BITS_PER_LONG 64
-#define _BITS_POSIX_OPT_H 1
-#define _BITS_TYPES_H 1
-#define _BITS_TYPESIZES_H 1
-#define __BLKCNT64_T_TYPE __SQUAD_TYPE
-#define __BLKCNT_T_TYPE __SLONGWORD_TYPE
-#define __BLKSIZE_T_TYPE __S32_TYPE
-#define __bos0(ptr) __builtin_object_size (ptr, 0)
-#define __bos(ptr) __builtin_object_size (ptr, __USE_FORTIFY_LEVEL > 1)
-#define _BSD_SIZE_T_ 
-#define _BSD_SIZE_T_DEFINED_ 
-#define __CLOCKID_T_TYPE __S32_TYPE
-#define __CLOCK_T_TYPE __SLONGWORD_TYPE
-#define __CONCAT(x,y) x ## y
-#define __CPU_MASK_TYPE __ULONGWORD_TYPE
-#define _CS_GNU_LIBC_VERSION _CS_GNU_LIBC_VERSION
-#define _CS_GNU_LIBPTHREAD_VERSION _CS_GNU_LIBPTHREAD_VERSION
-#define _CS_LFS64_CFLAGS _CS_LFS64_CFLAGS
-#define _CS_LFS64_LDFLAGS _CS_LFS64_LDFLAGS
-#define _CS_LFS64_LIBS _CS_LFS64_LIBS
-#define _CS_LFS64_LINTFLAGS _CS_LFS64_LINTFLAGS
-#define _CS_LFS_CFLAGS _CS_LFS_CFLAGS
-#define _CS_LFS_LDFLAGS _CS_LFS_LDFLAGS
-#define _CS_LFS_LIBS _CS_LFS_LIBS
-#define _CS_LFS_LINTFLAGS _CS_LFS_LINTFLAGS
-#define _CS_PATH _CS_PATH
-#define _CS_POSIX_V5_WIDTH_RESTRICTED_ENVS _CS_V5_WIDTH_RESTRICTED_ENVS
-#define _CS_POSIX_V6_ILP32_OFF32_CFLAGS _CS_POSIX_V6_ILP32_OFF32_CFLAGS
-#define _CS_POSIX_V6_ILP32_OFF32_LDFLAGS _CS_POSIX_V6_ILP32_OFF32_LDFLAGS
-#define _CS_POSIX_V6_ILP32_OFF32_LIBS _CS_POSIX_V6_ILP32_OFF32_LIBS
-#define _CS_POSIX_V6_ILP32_OFF32_LINTFLAGS _CS_POSIX_V6_ILP32_OFF32_LINTFLAGS
-#define _CS_POSIX_V6_ILP32_OFFBIG_CFLAGS _CS_POSIX_V6_ILP32_OFFBIG_CFLAGS
-#define _CS_POSIX_V6_ILP32_OFFBIG_LDFLAGS _CS_POSIX_V6_ILP32_OFFBIG_LDFLAGS
-#define _CS_POSIX_V6_ILP32_OFFBIG_LIBS _CS_POSIX_V6_ILP32_OFFBIG_LIBS
-#define _CS_POSIX_V6_ILP32_OFFBIG_LINTFLAGS _CS_POSIX_V6_ILP32_OFFBIG_LINTFLAGS
-#define _CS_POSIX_V6_LP64_OFF64_CFLAGS _CS_POSIX_V6_LP64_OFF64_CFLAGS
-#define _CS_POSIX_V6_LP64_OFF64_LDFLAGS _CS_POSIX_V6_LP64_OFF64_LDFLAGS
-#define _CS_POSIX_V6_LP64_OFF64_LIBS _CS_POSIX_V6_LP64_OFF64_LIBS
-#define _CS_POSIX_V6_LP64_OFF64_LINTFLAGS _CS_POSIX_V6_LP64_OFF64_LINTFLAGS
-#define _CS_POSIX_V6_LPBIG_OFFBIG_CFLAGS _CS_POSIX_V6_LPBIG_OFFBIG_CFLAGS
-#define _CS_POSIX_V6_LPBIG_OFFBIG_LDFLAGS _CS_POSIX_V6_LPBIG_OFFBIG_LDFLAGS
-#define _CS_POSIX_V6_LPBIG_OFFBIG_LIBS _CS_POSIX_V6_LPBIG_OFFBIG_LIBS
-#define _CS_POSIX_V6_LPBIG_OFFBIG_LINTFLAGS _CS_POSIX_V6_LPBIG_OFFBIG_LINTFLAGS
-#define _CS_POSIX_V6_WIDTH_RESTRICTED_ENVS _CS_V6_WIDTH_RESTRICTED_ENVS
-#define _CS_POSIX_V7_ILP32_OFF32_CFLAGS _CS_POSIX_V7_ILP32_OFF32_CFLAGS
-#define _CS_POSIX_V7_ILP32_OFF32_LDFLAGS _CS_POSIX_V7_ILP32_OFF32_LDFLAGS
-#define _CS_POSIX_V7_ILP32_OFF32_LIBS _CS_POSIX_V7_ILP32_OFF32_LIBS
-#define _CS_POSIX_V7_ILP32_OFF32_LINTFLAGS _CS_POSIX_V7_ILP32_OFF32_LINTFLAGS
-#define _CS_POSIX_V7_ILP32_OFFBIG_CFLAGS _CS_POSIX_V7_ILP32_OFFBIG_CFLAGS
-#define _CS_POSIX_V7_ILP32_OFFBIG_LDFLAGS _CS_POSIX_V7_ILP32_OFFBIG_LDFLAGS
-#define _CS_POSIX_V7_ILP32_OFFBIG_LIBS _CS_POSIX_V7_ILP32_OFFBIG_LIBS
-#define _CS_POSIX_V7_ILP32_OFFBIG_LINTFLAGS _CS_POSIX_V7_ILP32_OFFBIG_LINTFLAGS
-#define _CS_POSIX_V7_LP64_OFF64_CFLAGS _CS_POSIX_V7_LP64_OFF64_CFLAGS
-#define _CS_POSIX_V7_LP64_OFF64_LDFLAGS _CS_POSIX_V7_LP64_OFF64_LDFLAGS
-#define _CS_POSIX_V7_LP64_OFF64_LIBS _CS_POSIX_V7_LP64_OFF64_LIBS
-#define _CS_POSIX_V7_LP64_OFF64_LINTFLAGS _CS_POSIX_V7_LP64_OFF64_LINTFLAGS
-#define _CS_POSIX_V7_LPBIG_OFFBIG_CFLAGS _CS_POSIX_V7_LPBIG_OFFBIG_CFLAGS
-#define _CS_POSIX_V7_LPBIG_OFFBIG_LDFLAGS _CS_POSIX_V7_LPBIG_OFFBIG_LDFLAGS
-#define _CS_POSIX_V7_LPBIG_OFFBIG_LIBS _CS_POSIX_V7_LPBIG_OFFBIG_LIBS
-#define _CS_POSIX_V7_LPBIG_OFFBIG_LINTFLAGS _CS_POSIX_V7_LPBIG_OFFBIG_LINTFLAGS
-#define _CS_POSIX_V7_WIDTH_RESTRICTED_ENVS _CS_V7_WIDTH_RESTRICTED_ENVS
-#define _CS_V5_WIDTH_RESTRICTED_ENVS _CS_V5_WIDTH_RESTRICTED_ENVS
-#define _CS_V6_ENV _CS_V6_ENV
-#define _CS_V6_WIDTH_RESTRICTED_ENVS _CS_V6_WIDTH_RESTRICTED_ENVS
-#define _CS_V7_ENV _CS_V7_ENV
-#define _CS_V7_WIDTH_RESTRICTED_ENVS _CS_V7_WIDTH_RESTRICTED_ENVS
-#define _CS_XBS5_ILP32_OFF32_CFLAGS _CS_XBS5_ILP32_OFF32_CFLAGS
-#define _CS_XBS5_ILP32_OFF32_LDFLAGS _CS_XBS5_ILP32_OFF32_LDFLAGS
-#define _CS_XBS5_ILP32_OFF32_LIBS _CS_XBS5_ILP32_OFF32_LIBS
-#define _CS_XBS5_ILP32_OFF32_LINTFLAGS _CS_XBS5_ILP32_OFF32_LINTFLAGS
-#define _CS_XBS5_ILP32_OFFBIG_CFLAGS _CS_XBS5_ILP32_OFFBIG_CFLAGS
-#define _CS_XBS5_ILP32_OFFBIG_LDFLAGS _CS_XBS5_ILP32_OFFBIG_LDFLAGS
-#define _CS_XBS5_ILP32_OFFBIG_LIBS _CS_XBS5_ILP32_OFFBIG_LIBS
-#define _CS_XBS5_ILP32_OFFBIG_LINTFLAGS _CS_XBS5_ILP32_OFFBIG_LINTFLAGS
-#define _CS_XBS5_LP64_OFF64_CFLAGS _CS_XBS5_LP64_OFF64_CFLAGS
-#define _CS_XBS5_LP64_OFF64_LDFLAGS _CS_XBS5_LP64_OFF64_LDFLAGS
-#define _CS_XBS5_LP64_OFF64_LIBS _CS_XBS5_LP64_OFF64_LIBS
-#define _CS_XBS5_LP64_OFF64_LINTFLAGS _CS_XBS5_LP64_OFF64_LINTFLAGS
-#define _CS_XBS5_LPBIG_OFFBIG_CFLAGS _CS_XBS5_LPBIG_OFFBIG_CFLAGS
-#define _CS_XBS5_LPBIG_OFFBIG_LDFLAGS _CS_XBS5_LPBIG_OFFBIG_LDFLAGS
-#define _CS_XBS5_LPBIG_OFFBIG_LIBS _CS_XBS5_LPBIG_OFFBIG_LIBS
-#define _CS_XBS5_LPBIG_OFFBIG_LINTFLAGS _CS_XBS5_LPBIG_OFFBIG_LINTFLAGS
-#define __DADDR_T_TYPE __S32_TYPE
-#define _DEFAULT_SOURCE 1
-#define __DEV_T_TYPE __UQUAD_TYPE
-#define __END_DECLS 
-#define __errordecl(name,msg) extern void name (void) __attribute__((__error__ (msg)))
-#define __extern_always_inline extern __always_inline __attribute__ ((__gnu_inline__))
-#define __extern_inline extern __inline __attribute__ ((__gnu_inline__))
-#define __FD_SETSIZE 1024
-#define _FEATURES_H 1
-#define __flexarr []
-#define F_LOCK 1
-#define F_OK 0
-#define __fortify_function __extern_always_inline __attribute_artificial__
-#define __FSBLKCNT64_T_TYPE __UQUAD_TYPE
-#define __FSBLKCNT_T_TYPE __ULONGWORD_TYPE
-#define __FSFILCNT64_T_TYPE __UQUAD_TYPE
-#define __FSFILCNT_T_TYPE __ULONGWORD_TYPE
-#define __FSID_T_TYPE struct { int __val[2]; }
-#define __FSWORD_T_TYPE __SWORD_TYPE
-#define F_TEST 3
-#define F_TLOCK 2
-#define F_ULOCK 0
-#define _GCC_SIZE_T 
-#define _GETOPT_CORE_H 1
-#define _GETOPT_POSIX_H 1
-#define __gid_t_defined 
-#define __GID_T_TYPE __U32_TYPE
-#define __GLIBC__ 2
-#define __glibc_c99_flexarr_available 1
-#define __glibc_clang_has_extension(ext) 0
-#define __glibc_clang_prereq(maj,min) 0
-#define __glibc_has_attribute(attr) __has_attribute (attr)
-#define __glibc_likely(cond) __builtin_expect ((cond), 1)
-#define __glibc_macro_warning1(message) _Pragma (#message)
-#define __glibc_macro_warning(message) __glibc_macro_warning1 (GCC warning message)
-#define __GLIBC_MINOR__ 28
-#define __GLIBC_PREREQ(maj,min) ((__GLIBC__ << 16) + __GLIBC_MINOR__ >= ((maj) << 16) + (min))
-#define __glibc_unlikely(cond) __builtin_expect ((cond), 0)
-#define __GLIBC_USE_DEPRECATED_GETS 0
-#define __GLIBC_USE(F) __GLIBC_USE_ ## F
-#define __GNUC_PREREQ(maj,min) ((__GNUC__ << 16) + __GNUC_MINOR__ >= ((maj) << 16) + (min))
-#define __GNU_LIBRARY__ 6
-#define __HAVE_GENERIC_SELECTION 1
-#define __ID_T_TYPE __U32_TYPE
-#define __INO64_T_TYPE __UQUAD_TYPE
-#define __INO_T_MATCHES_INO64_T 1
-#define __INO_T_TYPE __ULONGWORD_TYPE
-#define __intptr_t_defined 
-#define ___int_size_t_h 
-#define __KERNEL_STRICT_NAMES 
-#define __KEY_T_TYPE __S32_TYPE
-#define __LDBL_REDIR1(name,proto,alias) name proto
-#define __LDBL_REDIR1_NTH(name,proto,alias) name proto __THROW
-#define __LDBL_REDIR_DECL(name) 
-#define __LDBL_REDIR(name,proto) name proto
-#define __LDBL_REDIR_NTH(name,proto) name proto __THROW
-#define __LEAF_ATTR __attribute__ ((__leaf__))
-#define __LEAF , __leaf__
-#define _LFS64_ASYNCHRONOUS_IO 1
-#define _LFS64_LARGEFILE 1
-#define _LFS64_STDIO 1
-#define _LFS_ASYNCHRONOUS_IO 1
-#define _LFS_LARGEFILE 1
-#define L_INCR SEEK_CUR
-#define L_SET SEEK_SET
-#define L_XTND SEEK_END
-#define __MODE_T_TYPE __U32_TYPE
-#define __NLINK_T_TYPE __U32_TYPE
-#define __nonnull(params) __attribute__ ((__nonnull__ params))
 #define __NR3264_fadvise64 223
 #define __NR3264_fcntl 25
 #define __NR3264_fstat 80
@@ -463,7 +292,7 @@
 #define __NTHNL(fct) __attribute__ ((__nothrow__)) fct
 #define NULL ((void *)0)
 #define __OFF64_T_TYPE __SQUAD_TYPE
-#define __off_t_defined 
+#define __off_t_defined
 #define __OFF_T_MATCHES_OFF64_T 1
 #define __OFF_T_TYPE __SLONGWORD_TYPE
 #define __P(args) args
@@ -488,7 +317,7 @@
 #define _PC_SYMLINK_MAX _PC_SYMLINK_MAX
 #define _PC_SYNC_IO _PC_SYNC_IO
 #define _PC_VDISABLE _PC_VDISABLE
-#define __pid_t_defined 
+#define __pid_t_defined
 #define __PID_T_TYPE __S32_TYPE
 #define __PMT(args) args
 #define _POSIX2_C_BIND __POSIX2_THIS_VERSION
@@ -798,71 +627,71 @@
 #define SEEK_CUR 1
 #define SEEK_END 2
 #define SEEK_SET 0
-#define __size_t 
-#define __size_t__ 
-#define __SIZE_T 
-#define __SIZE_T__ 
-#define _SIZE_T 
-#define _SIZE_T_ 
-#define _SIZET_ 
-#define _SIZE_T_DECLARED 
-#define _SIZE_T_DEFINED 
-#define _SIZE_T_DEFINED_ 
+#define __size_t
+#define __size_t__
+#define __SIZE_T
+#define __SIZE_T__
+#define _SIZE_T
+#define _SIZE_T_
+#define _SIZET_
+#define _SIZE_T_DECLARED
+#define _SIZE_T_DEFINED
+#define _SIZE_T_DEFINED_
 #define __SLONG32_TYPE int
 #define __SLONGWORD_TYPE long int
-#define __socklen_t_defined 
+#define __socklen_t_defined
 #define __SQUAD_TYPE long int
-#define __ssize_t_defined 
+#define __ssize_t_defined
 #define __SSIZE_T_TYPE __SWORD_TYPE
 #define STDERR_FILENO 2
 #define STDIN_FILENO 0
 #define STDOUT_FILENO 1
 #define __STRING(x) #x
-#define __stub_chflags 
-#define __stub___compat_bdflush 
-#define __stub___compat_create_module 
-#define __stub___compat_get_kernel_syms 
-#define __stub___compat_query_module 
-#define __stub___compat_uselib 
-#define __stub_fattach 
-#define __stub_fchflags 
-#define __stub_fdetach 
-#define __stub_getmsg 
-#define __stub_getpmsg 
-#define __stub_gtty 
-#define __stub_lchmod 
-#define __stub_putmsg 
-#define __stub_putpmsg 
-#define __stub_revoke 
-#define __stub_setlogin 
-#define __stub_sigreturn 
-#define __stub_sstk 
-#define __stub_stty 
-#define __stub_sysctl 
+#define __stub_chflags
+#define __stub___compat_bdflush
+#define __stub___compat_create_module
+#define __stub___compat_get_kernel_syms
+#define __stub___compat_query_module
+#define __stub___compat_uselib
+#define __stub_fattach
+#define __stub_fchflags
+#define __stub_fdetach
+#define __stub_getmsg
+#define __stub_getpmsg
+#define __stub_gtty
+#define __stub_lchmod
+#define __stub_putmsg
+#define __stub_putpmsg
+#define __stub_revoke
+#define __stub_setlogin
+#define __stub_sigreturn
+#define __stub_sstk
+#define __stub_stty
+#define __stub_sysctl
 #define __SUSECONDS_T_TYPE __SLONGWORD_TYPE
 #define __SWORD_TYPE long int
 #define __SYSCALL_SLONG_TYPE __SLONGWORD_TYPE
 #define __SYSCALL_ULONG_TYPE __ULONGWORD_TYPE
-#define __SYSCALL(x,y) 
+#define __SYSCALL(x,y)
 #define _SYS_CDEFS_H 1
-#define _SYS_SIZE_T_H 
+#define _SYS_SIZE_T_H
 #define __THROW __attribute__ ((__nothrow__ __LEAF))
 #define __THROWNL __attribute__ ((__nothrow__))
 #define __TIMER_T_TYPE void *
 #define __TIME_T_TYPE __SLONGWORD_TYPE
-#define _T_SIZE 
-#define _T_SIZE_ 
+#define _T_SIZE
+#define _T_SIZE_
 #define __U16_TYPE unsigned short int
 #define __U32_TYPE unsigned int
 #define __U64_TYPE unsigned long int
-#define __uid_t_defined 
+#define __uid_t_defined
 #define __UID_T_TYPE __U32_TYPE
 #define __ULONG32_TYPE unsigned int
 #define __ULONGWORD_TYPE unsigned long int
 #define _UNISTD_H 1
 #define __UQUAD_TYPE unsigned long int
 #define __USE_ATFILE 1
-#define __useconds_t_defined 
+#define __useconds_t_defined
 #define __USECONDS_T_TYPE __U32_TYPE
 #define __USE_FORTIFY_LEVEL 0
 #define __USE_ISOC11 1
@@ -884,7 +713,7 @@
 #define W_OK 2
 #define __WORDSIZE 64
 #define __WORDSIZE_TIME64_COMPAT32 0
-#define __wur 
+#define __wur
 #define _XBS5_ILP32_OFF32 -1
 #define _XBS5_ILP32_OFFBIG -1
 #define _XBS5_LP64_OFF64 1

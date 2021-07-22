@@ -5,8 +5,10 @@
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 32 "<command-line>" 2
 # 1 "hello.s"
+
+
 # 1 "include.h" 1
-# 2 "hello.s" 2
+# 4 "hello.s" 2
 
         .global _start
         .text

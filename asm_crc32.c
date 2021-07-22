@@ -21,7 +21,7 @@ https://android.googlesource.com/platform/external/linux-kselftest/+/d97034ccdf0
 /*
 https://elixir.bootlin.com/linux/v4.6/source/arch/arm64/crypto/crc32-arm64.c
 */
-static uint32_t crc32_hw(const void *p, unsigned int len, uint32_t crc)
+static uint32_t crc32_hw2(const void *p, unsigned int len, uint32_t crc)
 {
 	int64_t length = len;
 
@@ -41,7 +41,7 @@ static uint32_t crc32_hw(const void *p, unsigned int len, uint32_t crc)
 	}
 	if (length & sizeof(uint8_t))
 		CRC32B(crc, *((uint8_t*)p));
-	return crc;
+	return ~crc;
 }
 
 /*
@@ -54,14 +54,17 @@ uint32_t crc32_for_byte(uint32_t r) {
   return r ^ (uint32_t)0xFF000000L;
 }
 
-static uint32_t crc32_tab_ver1[0x100];
-void crc32_ver1(const void *data, size_t n_bytes, uint32_t* crc) {
-  static uint32_t table[0x100];
+static uint32_t crc32_tab_ver1[0x100] = {0};
+
+uint32_t crc32_ver1(const void *data, size_t n_bytes, uint32_t crc) {
+    uint32_t* p = &crc;
+  static uint32_t table[0x100] = {0};
   if(!*table)
     for(size_t i = 0; i < 0x100; ++i)
       crc32_tab_ver1[i] = crc32_for_byte(i);
   for(size_t i = 0; i < n_bytes; ++i)
-    *crc = crc32_tab_ver1[(uint8_t)*crc ^ ((uint8_t*)data)[i]] ^ *crc >> 8;
+    *p = crc32_tab_ver1[(uint8_t)*p ^ ((uint8_t*)data)[i]] ^ *p >> 8;
+  return *p;
 }
 
 /*
@@ -113,15 +116,13 @@ const uint32_t crc32_tab_ver2[] = {
     0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d
 };
 
-uint32_t crc32_ver2(const void *buf, size_t size)
+uint32_t crc32_ver2(const void *buf, size_t size, uint32_t crc)
 {
     const uint8_t *p = buf;
-    uint32_t crc;
-
     crc = ~0U;
     while (size--)
         crc = crc32_tab_ver2[(crc ^ *p++) & 0xFF] ^ (crc >> 8);
-    return crc ^ ~0U;
+    return ~crc;
 }
 
 
@@ -130,21 +131,20 @@ uint32_t crc32_hw1(const uint8_t *buf, size_t size, uint32_t crc)
     for (size_t i=0; i<size; i++) {
         CRC32B(crc, buf[i]);
     }
-    return crc;
+    return ~crc;
 }
 
-//static uint8_t test_data[] = {0xaa,0xbb,0xcc,0xdd,0xee,0xff,0x00,0x11};
 static uint8_t test_data[] = {0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39};
 
 int main() {
     uint32_t crc_1=0x00000000, crc_2=0x00000000, crc_3=0xffffffff, crc_4=0xffffffff;
     printf("Size of testdata: %d\n", sizeof(test_data));
     printf("Initial values:      SW1:%08x SW2:%08x HW:%08x\n",crc_1,crc_2,crc_3);
-    crc32_ver1(test_data, sizeof(test_data),&crc_1);
-    crc_2 = crc32_ver2(test_data, sizeof(test_data));
-    crc_3 = crc32_hw1(test_data, sizeof(test_data), crc_3);
-    crc_4 = crc32_hw(test_data, sizeof(test_data), crc_4);
-    printf("Final result:        SW1:%08x SW2:%08x HW:%08x HW2:%08x\n",crc_1,crc_2,~crc_3, ~crc_4);
+    crc_1 = crc32_ver1(test_data, sizeof(test_data), crc_1);
+    crc_2 = crc32_ver2(test_data, sizeof(test_data), crc_2);
+    crc_3 = crc32_hw1 (test_data, sizeof(test_data), crc_3);
+    crc_4 = crc32_hw2 (test_data, sizeof(test_data), crc_4);
+    printf("Final result:        SW1:%08x SW2:%08x HW:%08x HW2:%08x\n", crc_1, crc_2, crc_3, crc_4);
 }
 
 // gcc asm_crc32.c -o asm_crc32 -march=armv8.1-a
