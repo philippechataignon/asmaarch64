@@ -31,8 +31,7 @@ uint32_t crc32_for_byte(uint32_t r) {
 static uint32_t crc32_tab_ver1[0x100] = {0};
 
 uint32_t crc32_ver1(const uint8_t *data, size_t n_bytes, uint32_t crc) {
-    crc = ~crc;
-    uint32_t* p = &crc;
+  uint32_t* p = &crc;
   static uint32_t table[0x100] = {0};
   if(!*table)
     for(size_t i = 0; i < 0x100; ++i)
@@ -93,9 +92,7 @@ const uint32_t crc32_tab_ver2[] = {
 
 uint32_t crc32_ver2(const uint8_t *buf, size_t size, uint32_t crc)
 {
-    crc = ~crc;
     const uint8_t *p = buf;
-    crc = ~0U;
     while (size--)
         crc = crc32_tab_ver2[(crc ^ *p++) & 0xFF] ^ (crc >> 8);
     return crc;
