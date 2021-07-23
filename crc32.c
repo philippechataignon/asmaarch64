@@ -7,6 +7,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include "libcrc32.h"
+
 #define SIZE 65536
 
 int main(int ac, char** av) {
