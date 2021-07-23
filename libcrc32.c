@@ -19,32 +19,6 @@ https://android.googlesource.com/platform/external/linux-kselftest/+/d97034ccdf0
 #define CRC32CB(crc, value) __asm__("crc32cb %w[c], %w[c], %w[v]":[c]"+r"(crc):[v]"r"(value))
 
 /*
-https://elixir.bootlin.com/linux/v4.6/source/arch/arm64/crypto/crc32-arm64.c
-*/
-uint32_t crc32_hw2(const uint8_t *p, unsigned int len, uint32_t crc)
-{
-	int64_t length = len;
-
-	while ((length -= sizeof(uint64_t)) >= 0) {
-		CRC32X(crc, *((uint64_t*)p));
-		p += sizeof(uint64_t);
-	}
-
-	/* The following is more efficient than the straight loop */
-	if (length & sizeof(uint32_t)) {
-		CRC32W(crc, *((uint32_t*)p));
-		p += sizeof(uint32_t);
-	}
-	if (length & sizeof(uint16_t)) {
-		CRC32H(crc, *((uint16_t*)p));
-		p += sizeof(uint16_t);
-	}
-	if (length & sizeof(uint8_t))
-		CRC32B(crc, *((uint8_t*)p));
-	return ~crc;
-}
-
-/*
 http://home.thep.lu.se/~bjorn/crc/
 */
 
@@ -56,7 +30,7 @@ uint32_t crc32_for_byte(uint32_t r) {
 
 static uint32_t crc32_tab_ver1[0x100] = {0};
 
-uint32_t crc32_ver1(const void *data, size_t n_bytes, uint32_t crc) {
+uint32_t crc32_ver1(const uint8_t *data, size_t n_bytes, uint32_t crc) {
     crc = ~crc;
     uint32_t* p = &crc;
   static uint32_t table[0x100] = {0};
@@ -124,16 +98,7 @@ uint32_t crc32_ver2(const uint8_t *buf, size_t size, uint32_t crc)
     crc = ~0U;
     while (size--)
         crc = crc32_tab_ver2[(crc ^ *p++) & 0xFF] ^ (crc >> 8);
-    return ~crc;
-}
-
-
-uint32_t crc32_hw1(const uint8_t *buf, size_t size, uint32_t crc)
-{
-    for (size_t i=0; i<size; i++) {
-        CRC32B(crc, buf[i]);
-    }
-    return ~crc;
+    return crc;
 }
 
 uint32_t crc32_ver3(const uint8_t *message, size_t size,  uint32_t crc) {
@@ -147,5 +112,41 @@ uint32_t crc32_ver3(const uint8_t *message, size_t size,  uint32_t crc) {
          crc = (crc >> 1) ^ (0xEDB88320 & mask);
       }
    }
-   return ~crc;
+   return crc;
 }
+
+uint32_t crc32_hw1(const uint8_t *buf, size_t size, uint32_t crc)
+{
+    for (size_t i=0; i<size; i++) {
+        CRC32B(crc, buf[i]);
+    }
+    return crc;
+}
+
+
+/*
+https://elixir.bootlin.com/linux/v4.6/source/arch/arm64/crypto/crc32-arm64.c
+*/
+uint32_t crc32_hw2(const uint8_t *p, size_t len, uint32_t crc)
+{
+	int64_t length = len;
+
+	while ((length -= sizeof(uint64_t)) >= 0) {
+		CRC32X(crc, *((uint64_t*)p));
+		p += sizeof(uint64_t);
+	}
+
+	/* The following is more efficient than the straight loop */
+	if (length & sizeof(uint32_t)) {
+		CRC32W(crc, *((uint32_t*)p));
+		p += sizeof(uint32_t);
+	}
+	if (length & sizeof(uint16_t)) {
+		CRC32H(crc, *((uint16_t*)p));
+		p += sizeof(uint16_t);
+	}
+	if (length & sizeof(uint8_t))
+		CRC32B(crc, *((uint8_t*)p));
+	return crc;
+}
+

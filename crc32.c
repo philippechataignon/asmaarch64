@@ -9,15 +9,28 @@
 
 #include "libcrc32.h"
 
-#define SIZE 65536
+#define SIZE 1024
 
-int main(int ac, char** av) {
+int main(int argc, char* argv[]) {
     uint8_t buff[SIZE];
+    uint8_t num = atoi(argv[1]);
     size_t bytes;
-    bytes = fread(buff, 1, SIZE, stdin);
-    printf("Bytes read: %d First: %02x Last: %02x\n", bytes, buff[0], buff[8]);
     uint32_t crc = 0xffffffff;
-    crc = crc32_ver3(buff, bytes, crc);
-    printf("Final result: %08x\n", crc);
+    uint32_t (*fun)(const uint8_t*, size_t, uint32_t);
+    switch(num) {
+        case 1: fun = &crc32_ver1; break;
+        case 2: fun = &crc32_ver2; break;
+        case 3: fun = &crc32_ver3; break;
+        case 4: fun = &crc32_hw1; break;
+        case 5: fun = &crc32_hw2; break;
+    }
+    if (argc == 2) {
+        while(!feof(stdin) && !ferror(stdin)) {
+            bytes = fread(buff, 1, SIZE, stdin);
+            printf("Bytes: %d\n", bytes);
+            crc = (*fun)(buff, bytes, crc);
+        }
+        printf("Final result: %08x\n", ~crc);
+    }
     return 0;
 }
