@@ -13,9 +13,9 @@ int main(int ac, char** av) {
     uint8_t buff[SIZE];
     size_t bytes;
     bytes = fread(buff, 1, SIZE, stdin);
-    //printf("Bytes read: %d First: %02x Last: %02x\n", bytes, buff[0], buff[8]);
+    printf("Bytes read: %d First: %02x Last: %02x\n", bytes, buff[0], buff[8]);
     uint32_t crc = 0xffffffff;
-    crc = crc32_hw2(buff, bytes, crc);
-    //printf("Final result: %08x\n", crc);
+    crc = crc32_ver3(buff, bytes, crc);
+    printf("Final result: %08x\n", crc);
     return 0;
 }

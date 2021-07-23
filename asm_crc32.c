@@ -21,7 +21,7 @@ https://android.googlesource.com/platform/external/linux-kselftest/+/d97034ccdf0
 /*
 https://elixir.bootlin.com/linux/v4.6/source/arch/arm64/crypto/crc32-arm64.c
 */
-uint32_t crc32_hw2(const void *p, unsigned int len, uint32_t crc)
+uint32_t crc32_hw2(const uint8_t *p, unsigned int len, uint32_t crc)
 {
 	int64_t length = len;
 
@@ -117,7 +117,7 @@ const uint32_t crc32_tab_ver2[] = {
     0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d
 };
 
-uint32_t crc32_ver2(const void *buf, size_t size, uint32_t crc)
+uint32_t crc32_ver2(const uint8_t *buf, size_t size, uint32_t crc)
 {
     crc = ~crc;
     const uint8_t *p = buf;
@@ -136,17 +136,16 @@ uint32_t crc32_hw1(const uint8_t *buf, size_t size, uint32_t crc)
     return ~crc;
 }
 
-static uint8_t test_data[] = {0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39};
-
-// int main() {
-//     uint32_t crc_1=0x00000000, crc_2=0x00000000, crc_3=0xffffffff, crc_4=0xffffffff;
-//     printf("Size of testdata: %d\n", sizeof(test_data));
-//     printf("Initial values:      SW1:%08x SW2:%08x HW:%08x\n",crc_1,crc_2,crc_3);
-//     crc_1 = crc32_ver1(test_data, sizeof(test_data), crc_1);
-//     crc_2 = crc32_ver2(test_data, sizeof(test_data), crc_2);
-//     crc_3 = crc32_hw1 (test_data, sizeof(test_data), crc_3);
-//     crc_4 = crc32_hw2 (test_data, sizeof(test_data), crc_4);
-//     printf("Final result:        SW1:%08x SW2:%08x HW:%08x HW2:%08x\n", crc_1, crc_2, crc_3, crc_4);
-// }
-
-// gcc asm_crc32.c -o asm_crc32 -march=armv8.1-a
+uint32_t crc32_ver3(const uint8_t *message, size_t size,  uint32_t crc) {
+   int64_t i;
+   int16_t j;
+   int32_t mask;
+   for (i = 0; i < size; i++) {
+      crc = crc ^ message[i];       // Get next byte.
+      for (j = 7; j >= 0; j--) {    // Do eight times.
+         mask = -(crc & 1);
+         crc = (crc >> 1) ^ (0xEDB88320 & mask);
+      }
+   }
+   return ~crc;
+}
