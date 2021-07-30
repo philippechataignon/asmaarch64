@@ -21,26 +21,59 @@ https://android.googlesource.com/platform/external/linux-kselftest/+/d97034ccdf0
 http://home.thep.lu.se/~bjorn/crc/
 */
 
-uint32_t crc32_for_byte(uint32_t r)
+#define DEBUG 0
+
+uint32_t crc32_for_byte(uint32_t r, uint32_t poly)
 {
+    if (DEBUG)
+        printf("%d", r);
 	for (int8_t j = 0; j < 8; ++j)
-		r = (r & 1 ? r >> 1 : (uint32_t) 0xEDB88320L ^ r >> 1);
-	return r ^ (uint32_t) 0xFF000000L;
+		r = r & 1 ? poly ^ r >> 1 : r >> 1;
+    if (DEBUG)
+        printf(" %08x\n", r);
+    return r;
+}
+
+uint32_t crc32_for_byte_rev(uint32_t r, uint32_t poly)
+{
+    if (DEBUG)
+        printf("%d", r);
+	for (int8_t j = 0; j < 8; ++j)
+		r = (r & 1 ? r >> 1 : poly ^ r >> 1);
+    r = r ^ (uint32_t) 0xFF000000L;
+    if (DEBUG)
+        printf(" %08x\n", r);
+    return r;
 }
 
 uint32_t crc32_ver1(const uint8_t * data, size_t n_bytes, uint32_t crc)
 {
     /* compute tab one time */
+    uint32_t poly = 0xEDB88320L;
     if(!*crc32_tab_ver1) {
 	    for (size_t i = 0; i < 0x100; ++i) {
-		    crc32_tab_ver1[i] = crc32_for_byte(i);
-            // printf("%d %08x\n", i, crc32_tab_ver1[i]);
+		    crc32_tab_ver1[i] = crc32_for_byte_rev(i, poly);
 	    }
     }
 	for (size_t i = 0; i < n_bytes; ++i) {
 		crc = crc32_tab_ver1[(uint8_t) crc ^ data[i]] ^ crc >> 8;
 	}
 	return crc;
+}
+
+void crc32_create_lookup()
+{
+    uint32_t poly = 0x04C11DB7;
+	size_t i = 0;
+    printf("static const uint32_t crc32_tab[] = {\n");
+    printf("    ");
+	while (i < 0x100) {
+        printf(" 0x%08x%c", crc32_for_byte(i, poly), i == 0xff ? '\n' : ',');
+        i++;
+        if (i % 6 == 0)
+            printf("\n    ");
+    }
+    printf("};\n");
 }
 
 /*
@@ -84,21 +117,21 @@ uint32_t crc32_hw2(const uint8_t * p, size_t len, uint32_t crc)
 	int64_t length = len;
 
 	while ((length -= sizeof(uint64_t)) >= 0) {
-		CRC32X(crc, *((uint64_t *) p));
+		CRC32X(crc, *((uint64_t*) p));
 		p += sizeof(uint64_t);
 	}
 
 	/* The following is more efficient than the straight loop */
 	if (length & sizeof(uint32_t)) {
-		CRC32W(crc, *((uint32_t *) p));
+		CRC32W(crc, *((uint32_t*) p));
 		p += sizeof(uint32_t);
 	}
 	if (length & sizeof(uint16_t)) {
-		CRC32H(crc, *((uint16_t *) p));
+		CRC32H(crc, *((uint16_t*) p));
 		p += sizeof(uint16_t);
 	}
 	if (length & sizeof(uint8_t))
-		CRC32B(crc, *((uint8_t *) p));
+		CRC32B(crc, *((uint8_t*) p));
 	return crc;
 }
 
