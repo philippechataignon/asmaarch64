@@ -66,12 +66,12 @@ void crc32_create_lookup()
     uint32_t poly = 0xEDB88320L; // reversed 0x04C11DB7;
 	size_t i = 0;
     printf("static const uint32_t crc32_tab[] = {\n");
-    printf("    ");
+    printf("\t");
 	while (i < 0x100) {
         printf(" 0x%08x%c", crc32_for_byte(i, poly), i == 0xff ? '\n' : ',');
         i++;
         if (i % 6 == 0)
-            printf("\n    ");
+            printf("\n\t");
     }
     printf("};\n");
 }
