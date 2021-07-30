@@ -63,7 +63,7 @@ uint32_t crc32_ver1(const uint8_t * data, size_t n_bytes, uint32_t crc)
 
 void crc32_create_lookup()
 {
-    uint32_t poly = 0x04C11DB7;
+    uint32_t poly = 0xEDB88320L; // reversed 0x04C11DB7;
 	size_t i = 0;
     printf("static const uint32_t crc32_tab[] = {\n");
     printf("    ");
