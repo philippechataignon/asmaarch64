@@ -14,6 +14,10 @@
 int main(int argc, char *argv[])
 {
 	uint8_t buff[SIZE];
+	if (argc != 2) {
+        puts("Exemple: ./crc32 4 < filein");
+        return 1;
+    }
 	uint8_t num = atoi(argv[1]);
 	size_t bytes;
 	uint32_t crc = 0xffffffff;
