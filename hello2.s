@@ -1,12 +1,10 @@
 .nolist
 .include "syscall.s"
 .list
-
 .globl _start
-.text
-# Our application's entry point
-_start:
 
+.text
+_start:
     mov     x0,#1          // fd := STDOUT_FILENO 
     ldr     x1,=msg        // buf := msg 
     ldr     x2,=len        // count := len 
@@ -18,8 +16,6 @@ _start:
     svc     #0             // invoke syscall 
 
 .data
-
-msg0:   .asciz        "Offset\n"
 msg:    .asciz        "Hello, ARM64!\n"
 len = . - msg
 
