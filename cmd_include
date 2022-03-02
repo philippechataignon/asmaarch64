@@ -1,0 +1,4 @@
+# cpp -dM /usr/include/unistd.h > headers.h
+#cpp -dM /usr/include/asm-generic/unistd.h >> headers.h
+#sort headers.h|uniq -u | awk '/^#define/ && $2 ~ /^__NR/ {print $2, "=", $3}' > syscall.s
+cpp -dM /usr/include/asm-generic/unistd.h | sort  | awk '/^#define/ && $2 ~ /^__NR/ {print $2, "=", $3}' > syscall.s
