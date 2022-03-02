@@ -39,5 +39,3 @@ calc:                                   // @calc
 
 	.ident	"clang version 7.0.1-8 (tags/RELEASE_701/final)"
 	.section	".note.GNU-stack","",@progbits
-	.addrsig
-	.addrsig_sym calc

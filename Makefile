@@ -1,18 +1,12 @@
-CFLAGS=-march=armv8.1-a -O3
+%.o: %.s
+	as -o "$@" "$<"
+%: %.o
+	ld -o "$@" "$<"
 
-all: crc32 lookup
+obj = $(patsubst %.s, %.o, $(wildcard *.s)) $(patsubst %.S, %.o, $(wildcard *.S))
+target = $(patsubst %.s, %, $(wildcard *.s)) $(patsubst %.S, %, $(wildcard *.S))
 
-crc32: crc32.o libcrc32.a 
-	gcc $(CFLAGS) -o crc32 crc32.o -L. -lcrc32
-
-lookup: lookup.o libcrc32.a 
-	gcc $(CFLAGS) -o lookup lookup.o -L. -lcrc32
-
-libcrc32.a: libcrc32.c 
-	gcc -c $(CFLAGS) -o libcrc32.o libcrc32.c
-	ar rcs libcrc32.a libcrc32.o
-
-libs: libcrc32.a
+all:	$(target) $(obj)
 
 clean:
-	rm -f crc32 *.o *.a
+	-rm -f $(target) $(obj)
