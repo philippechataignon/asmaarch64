@@ -4,6 +4,7 @@
 .global length
 .global width
 .global perim
+.global entier
 
 .section .data
 .section .bss
@@ -18,7 +19,8 @@ i:          .fill 4
 l:          .fill 8
 
 .section .rodata
-hello: .string "hello\n"
+hello: .string "Hello!\n"
+entier: .word 123456789
 
 .section .text
 
