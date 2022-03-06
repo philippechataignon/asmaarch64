@@ -1,10 +1,10 @@
 .nolist
 .include "syscall.s"
 .list
-.globl _start
+.globl main
 
 .text
-_start:
+main:
     mov     x0,#1          // fd := STDOUT_FILENO 
     ldr     x1,=msg        // buf := msg 
     ldr     x2,=len        // count := len 

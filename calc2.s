@@ -1,23 +1,28 @@
-    .section .data
+.global calc2
+.global hello
+.global c,s,i,l
+.global length
+.global width
+.global perim
 
-length:     .word 3
-width:      .word 4
-perim:      .word 0
+.section .data
+.section .bss
 
-    .section .bss
-c:          .skip 1
-s:          .skip 2
-i:          .skip 4
-l:          .skip 8
+length:     .fill 4
+width:      .fill 4
+perim:      .fill 4
 
-    .section .rodata
-helloLabel: .string "hello\n"
+c:          .fill 1
+s:          .fill 2
+i:          .fill 4
+l:          .fill 8
 
-    .section .text
+.section .rodata
+hello: .string "hello\n"
 
-    .global main
+.section .text
 
-main:
+calc2:
     adr x0, length
     ldr w1, [x0]
     adr x0, width
