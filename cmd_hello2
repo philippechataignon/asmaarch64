@@ -1,0 +1,3 @@
+as -al -o hello2.o hello2.s
+ld -s -o hello2 hello2.o
+# ld -o hello2 hello2.o

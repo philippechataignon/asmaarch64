@@ -14,9 +14,18 @@ dll.add4.argtypes = (
     ctypes.c_int
 )
 start = time()
-r = dll.add4(arr, len(arr))
+r1 = dll.add4(arr, len(arr))
+print(time() - start)
+dll = ctypes.cdll.LoadLibrary("./add4b.so")
+dll.add4.restype = ctypes.c_long
+dll.add4.argtypes = (
+    np.ctypeslib.ndpointer(dtype=np.int32, ndim=1, flags='C_CONTIGUOUS'),
+    ctypes.c_int
+)
+start = time()
+r2 = dll.add4(arr, len(arr))
 print(time() - start)
 start = time()
 s = np.sum(arr)
 print(time() - start)
-print(r, s)
+print(r1, r2, s)
