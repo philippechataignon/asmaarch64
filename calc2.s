@@ -1,12 +1,10 @@
 .global calc2
 .global hello
-.global c,s,i,l
 .global length
 .global width
 .global perim
 .global entier
 
-.section .data
 .section .bss
 
 length:     .fill 4
@@ -21,6 +19,8 @@ l:          .fill 8
 .section .rodata
 hello: .string "Hello!\n"
 entier: .word 123456789
+
+.section .data
 
 .section .text
 

@@ -1,6 +1,6 @@
 .global entier
 .global calc1
-.data
+.bss
 entier: .fill 4
 
 .text
